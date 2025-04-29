@@ -1,0 +1,16 @@
+services:
+  backend-aquatic-1.1:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - do_estimation_api
+    restart: always
+
+  do_estimation_api:
+    image: ${DO_LSTM_ESTIMATOR_CONTAINER_URL}
+    ports:
+      - "7575:7575"
+    restart: always
