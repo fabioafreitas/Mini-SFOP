@@ -7,8 +7,6 @@ from datetime import datetime
 import asyncio
 import logging
 from os import getenv
-from .services.smartrural_thingsboard_data_structure import SmartruralThingsboardDataStructure
-
 
 
 class GetUniProdHistoryReportTests(APITestCase):
@@ -39,11 +37,12 @@ class GetUniProdHistoryReportTests(APITestCase):
 
     @classmethod
     async def async_setup(cls):
-        cls.smart_tb_data = SmartruralThingsboardDataStructure(
-            url=getenv('TB_URL'),
-            username=getenv('TB_USERNAME'),
-            password=getenv('TB_PASSWORD')
-        )
+        cls.smart_tb_data = None
+        # cls.smart_tb_data = SmartruralThingsboardDataStructure(
+        #     url=getenv('TB_URL'),
+        #     username=getenv('TB_USERNAME'),
+        #     password=getenv('TB_PASSWORD')
+        # )
         cls.smart_tb_data.logger.setLevel(logging.CRITICAL) # disable the logs
         await cls.smart_tb_data.create_aviquality_env()
 
